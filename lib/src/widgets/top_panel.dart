@@ -36,15 +36,15 @@ class _TopPanelState extends State<TopPanel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          Container(
             height: 20,
+            alignment: Alignment.centerRight,
             child: widget.currentCandle != null
                 ? CandleInfoText(
                     candle: widget.currentCandle!,
                     bullColor: widget.style.primaryBull,
                     bearColor: widget.style.primaryBear,
-                    defaultStyle: TextStyle(
-                        color: widget.style.borderColor, fontSize: 10),
+                    defaultStyle: TextStyle(color: widget.style.borderColor, fontSize: 10),
                   )
                 : Container(),
           ),
@@ -63,16 +63,13 @@ class _TopPanelState extends State<TopPanel> {
                                 onTap: () {
                                   widget.toggleIndicatorVisibility(e.name);
                                 },
-                                child: widget.unvisibleIndicators
-                                        .contains(e.name)
+                                child: widget.unvisibleIndicators.contains(e.name)
                                     ? Icon(
                                         Icons.visibility_off_outlined,
                                         size: 16,
                                         color: widget.style.primaryTextColor,
                                       )
-                                    : Icon(Icons.visibility_outlined,
-                                        size: 16,
-                                        color: widget.style.primaryTextColor),
+                                    : Icon(Icons.visibility_outlined, size: 16, color: widget.style.primaryTextColor),
                               ),
                               SizedBox(
                                 width: 10,
@@ -82,9 +79,7 @@ class _TopPanelState extends State<TopPanel> {
                                       onTap: () {
                                         widget.onRemoveIndicator!(e.name);
                                       },
-                                      child: Icon(Icons.close,
-                                          size: 16,
-                                          color: widget.style.primaryTextColor),
+                                      child: Icon(Icons.close, size: 16, color: widget.style.primaryTextColor),
                                     )
                                   : Container(),
                             ],
@@ -106,10 +101,7 @@ class _TopPanelState extends State<TopPanel> {
                     borderColor: widget.style.borderColor,
                     child: Row(
                       children: [
-                        Icon(
-                            showIndicatorNames
-                                ? Icons.keyboard_arrow_up_rounded
-                                : Icons.keyboard_arrow_down_rounded,
+                        Icon(showIndicatorNames ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
                             color: widget.style.primaryTextColor),
                         Text(widget.indicators.length.toString()),
                       ],
