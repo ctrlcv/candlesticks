@@ -67,13 +67,13 @@ class _TimeRowState extends State<TimeRow> {
       numberFormat(_time.month) +
           "/" +
           numberFormat(_time.day) +
-          "\n" +
+          " " +
           numberFormat(_time.hour) +
           ":" +
           numberFormat(_time.minute),
       style: TextStyle(
         color: color,
-        fontSize: 11,
+        fontSize: 10,
       ),
     );
   }
