@@ -273,61 +273,61 @@ class _CandlesticksState extends State<Candlesticks> {
               ...widget.actions
             ],
           ),
-          Positioned(
-            left: 0,
-            top: 0,
-            child: Row(
-              children: [
-                if (widget.titleWidget != null) widget.titleWidget!,
-                widget.showZoomButtons
-                    ? Container(
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  candleWidth -= 2;
-                                  candleWidth = max(candleWidth, 2);
-                                });
-                              },
-                              child: Container(
-                                width: 30,
-                                height: 30,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  border: Border.all(color: style.borderColor, width: 0.5),
-                                ),
-                                child: Icon(Icons.remove, color: style.borderColor),
-                              ),
-                            ),
-                            const SizedBox(width: 4),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  candleWidth += 2;
-                                  candleWidth = min(candleWidth, 20);
-                                });
-                              },
-                              child: Container(
-                                width: 30,
-                                height: 30,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  border: Border.all(color: style.borderColor, width: 0.5),
-                                ),
-                                child: Icon(Icons.add, color: style.borderColor),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : Container(),
-              ],
-            ),
-          ),
         ],
+        Positioned(
+          left: 0,
+          top: 0,
+          child: Row(
+            children: [
+              if (widget.titleWidget != null) widget.titleWidget!,
+              widget.showZoomButtons
+                  ? Container(
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                candleWidth -= 2;
+                                candleWidth = max(candleWidth, 2);
+                              });
+                            },
+                            child: Container(
+                              width: 30,
+                              height: 30,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                border: Border.all(color: style.borderColor, width: 0.5),
+                              ),
+                              child: Icon(Icons.remove, color: style.borderColor),
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                candleWidth += 2;
+                                candleWidth = min(candleWidth, 20);
+                              });
+                            },
+                            child: Container(
+                              width: 30,
+                              height: 30,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                border: Border.all(color: style.borderColor, width: 0.5),
+                              ),
+                              child: Icon(Icons.add, color: style.borderColor),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Container(),
+            ],
+          ),
+        ),
       ],
     );
   }
