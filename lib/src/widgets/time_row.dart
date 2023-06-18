@@ -74,6 +74,7 @@ class _TimeRowState extends State<TimeRow> {
       style: TextStyle(
         color: color,
         fontSize: 10,
+        letterSpacing: -1,
       ),
     );
   }
