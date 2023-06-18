@@ -47,6 +47,8 @@ class Candlesticks extends StatefulWidget {
 
   final CandleSticksStyle? style;
 
+  final double? candleWidth;
+
   const Candlesticks({
     Key? key,
     required this.candles,
@@ -58,6 +60,7 @@ class Candlesticks extends StatefulWidget {
     this.indicators,
     this.onRemoveIndicator,
     this.style,
+    this.candleWidth,
   })  : assert(candles.length == 0 || candles.length > 1, "Please provide at least 2 candles"),
         super(key: key);
 
@@ -90,6 +93,8 @@ class _CandlesticksState extends State<Candlesticks> {
     if (mainWindowDataContainer == null) {
       mainWindowDataContainer = MainWindowDataContainer(widget.indicators ?? [], widget.candles);
     }
+
+    candleWidth = widget.candleWidth ?? 6;
   }
 
   @override
