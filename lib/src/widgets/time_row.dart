@@ -64,10 +64,16 @@ class _TimeRowState extends State<TimeRow> {
   /// Day/month text widget
   Text _monthDayText(DateTime _time, Color color) {
     return Text(
-      numberFormat(_time.month) + "/" + numberFormat(_time.day),
+      numberFormat(_time.month) +
+          "/" +
+          numberFormat(_time.day) +
+          "\n" +
+          numberFormat(_time.hour) +
+          ":" +
+          numberFormat(_time.minute),
       style: TextStyle(
         color: color,
-        fontSize: 12,
+        fontSize: 11,
       ),
     );
   }
