@@ -225,9 +225,9 @@ class _MobileChartState extends State<MobileChart> {
                                         ),
                                       ),
                                     ),
-                                    // SizedBox(
-                                    //   width: PRICE_BAR_WIDTH,
-                                    // ),
+                                    SizedBox(
+                                      width: PRICE_BAR_WIDTH,
+                                    ),
                                   ],
                                 ),
                               ],
@@ -244,6 +244,10 @@ class _MobileChartState extends State<MobileChart> {
                                         right: BorderSide(
                                           color: widget.style.borderColor,
                                           width: 1,
+                                        ),
+                                        bottom: BorderSide(
+                                          color: widget.style.borderColor,
+                                          width: 0.5,
                                         ),
                                       ),
                                     ),

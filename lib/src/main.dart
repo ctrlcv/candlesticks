@@ -74,7 +74,7 @@ class Candlesticks extends StatefulWidget {
 class _CandlesticksState extends State<Candlesticks> {
   /// index of the newest candle to be displayed
   /// changes when user scrolls along the chart
-  int index = -10;
+  int index = 0;
   double lastX = 0;
   int lastIndex = -10;
 
