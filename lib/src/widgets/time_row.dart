@@ -117,7 +117,10 @@ class _TimeRowState extends State<TimeRow> {
             reverse: true,
             itemBuilder: (context, index) {
               DateTime _time = _timeCalculator(step, index, dif);
-              int maxCount = math.max(widget.candles.length, 1000);
+              bool isFuture = false;
+              if (_time.isAfter(DateTime.now())) {
+                isFuture = true;
+              }
 
               return Column(
                 mainAxisSize: MainAxisSize.max,
@@ -128,7 +131,7 @@ class _TimeRowState extends State<TimeRow> {
                       color: widget.style.borderColor,
                     ),
                   ),
-                  _monthDayText(_time, (maxCount - 1 == index) ? Colors.transparent : widget.style.primaryTextColor),
+                  _monthDayText(_time, isFuture ? Colors.transparent : widget.style.primaryTextColor),
                   // dif.compareTo(Duration(days: 1)) > 0
                   //     ? _monthDayText(_time, widget.style.primaryTextColor)
                   //     : _hourMinuteText(_time, widget.style.primaryTextColor),
