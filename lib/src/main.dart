@@ -292,14 +292,14 @@ class _CandlesticksState extends State<Candlesticks> {
                               });
                             },
                             child: Container(
-                              width: 30,
-                              height: 30,
+                              width: 26,
+                              height: 26,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(2),
                                 border: Border.all(color: style.borderColor, width: 0.5),
                               ),
-                              child: Icon(Icons.remove, color: style.borderColor),
+                              child: Icon(Icons.remove, color: style.borderColor, size: 20),
                             ),
                           ),
                           const SizedBox(width: 4),
@@ -311,14 +311,14 @@ class _CandlesticksState extends State<Candlesticks> {
                               });
                             },
                             child: Container(
-                              width: 30,
-                              height: 30,
+                              width: 26,
+                              height: 26,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(2),
                                 border: Border.all(color: style.borderColor, width: 0.5),
                               ),
-                              child: Icon(Icons.add, color: style.borderColor),
+                              child: Icon(Icons.add, color: style.borderColor, size: 20),
                             ),
                           ),
                         ],
