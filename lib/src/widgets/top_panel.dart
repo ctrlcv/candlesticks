@@ -39,6 +39,7 @@ class _TopPanelState extends State<TopPanel> {
           Container(
             height: 20,
             alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 64),
             child: widget.currentCandle != null
                 ? CandleInfoText(
                     candle: widget.currentCandle!,
