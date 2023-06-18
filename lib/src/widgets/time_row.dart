@@ -1,8 +1,9 @@
+import 'dart:math' as math;
+
 import 'package:candlesticks/src/constant/view_constants.dart';
 import 'package:candlesticks/src/models/candle.dart';
 import 'package:candlesticks/src/models/candle_sticks_style.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 class TimeRow extends StatefulWidget {
   final List<Candle> candles;
@@ -46,13 +47,11 @@ class _TimeRowState extends State<TimeRow> {
     int candleNumber = (step + 1) ~/ 2 - 10 + index * step + -1;
     DateTime? _time;
     if (candleNumber < 0)
-      _time = widget.candles[0].date.add(Duration(
-          milliseconds: dif.inMilliseconds ~/ -1 * step * candleNumber));
+      _time = widget.candles[0].date.add(Duration(milliseconds: dif.inMilliseconds ~/ -1 * step * candleNumber));
     else if (candleNumber < widget.candles.length)
       _time = widget.candles[candleNumber].date;
     else {
-      _time = widget.candles[0].date.subtract(
-          Duration(milliseconds: dif.inMilliseconds ~/ step * candleNumber));
+      _time = widget.candles[0].date.subtract(Duration(milliseconds: dif.inMilliseconds ~/ step * candleNumber));
     }
     return _time;
   }
@@ -90,8 +89,7 @@ class _TimeRowState extends State<TimeRow> {
 
   @override
   void didUpdateWidget(TimeRow oldWidget) {
-    if (oldWidget.index != widget.index ||
-        oldWidget.candleWidth != widget.candleWidth)
+    if (oldWidget.index != widget.index || oldWidget.candleWidth != widget.candleWidth)
       _scrollController.jumpTo((widget.index + 10) * widget.candleWidth);
     super.didUpdateWidget(oldWidget);
   }
@@ -99,8 +97,7 @@ class _TimeRowState extends State<TimeRow> {
   @override
   Widget build(BuildContext context) {
     int step = _stepCalculator();
-    final dif =
-        widget.candles[0].date.difference(widget.candles[1].date) * step;
+    final dif = widget.candles[0].date.difference(widget.candles[1].date) * step;
     return Padding(
       padding: const EdgeInsets.only(right: PRICE_BAR_WIDTH + 1.0),
       child: Stack(
@@ -123,9 +120,10 @@ class _TimeRowState extends State<TimeRow> {
                       color: widget.style.borderColor,
                     ),
                   ),
-                  dif.compareTo(Duration(days: 1)) > 0
-                      ? _monthDayText(_time, widget.style.primaryTextColor)
-                      : _hourMinuteText(_time, widget.style.primaryTextColor),
+                  _monthDayText(_time, widget.style.primaryTextColor),
+                  // dif.compareTo(Duration(days: 1)) > 0
+                  //     ? _monthDayText(_time, widget.style.primaryTextColor)
+                  //     : _hourMinuteText(_time, widget.style.primaryTextColor),
                 ],
               );
             },
