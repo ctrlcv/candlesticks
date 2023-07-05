@@ -91,6 +91,8 @@ class _MobileChartState extends State<MobileChart> {
         final int candlesStartIndex = max(widget.index, 0);
         final int candlesEndIndex = min(maxWidth ~/ widget.candleWidth + widget.index, widget.candles.length - 1);
 
+        debugPrint("MobileChart() candlesStartIndex $candlesStartIndex, candlesEndIndex $candlesEndIndex");
+
         if (candlesEndIndex == widget.candles.length - 1) {
           Future(() {
             widget.onReachEnd();

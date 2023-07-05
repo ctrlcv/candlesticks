@@ -51,6 +51,10 @@ class Candlesticks extends StatefulWidget {
 
   final bool showZoomButtons;
 
+  final DateTime? markDate;
+
+  final double? markPrice;
+
   const Candlesticks({
     Key? key,
     required this.candles,
@@ -64,6 +68,8 @@ class Candlesticks extends StatefulWidget {
     this.style,
     this.titleWidget,
     this.showZoomButtons = true,
+    this.markDate,
+    this.markPrice,
   })  : assert(candles.length == 0 || candles.length > 1, "Please provide at least 2 candles"),
         super(key: key);
 
