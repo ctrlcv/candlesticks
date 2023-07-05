@@ -79,7 +79,7 @@ class MobileChart extends StatefulWidget {
 }
 
 class _MobileChartState extends State<MobileChart> {
-  GlobalKey _chartKey = GlobalKey();
+  final GlobalKey _chartKey = GlobalKey();
 
   double? longPressX;
   double? longPressY;
@@ -256,7 +256,7 @@ class _MobileChartState extends State<MobileChart> {
                                                     bullColor: widget.style.primaryBull,
                                                   ),
                                                 ),
-                                                if (markIndex != -1)
+                                                if (markIndex != -1 && getPosY(widget.markPrice ?? 0, high, low) != -1)
                                                   Positioned(
                                                     top: getPosY(widget.markPrice ?? 0, high, low),
                                                     right: (widget.candleWidth * (markIndex - widget.index)),
@@ -490,8 +490,15 @@ class _MobileChartState extends State<MobileChart> {
   }
 
   double getPosY(double markPrice, double high, double low) {
+    if (_chartKey.currentContext == null) {
+      debugPrint("getPosY() _chartKey.currentContext is null");
+      return -1;
+    }
+
     final RenderBox renderBox = _chartKey.currentContext!.findRenderObject() as RenderBox;
     Size size = renderBox.size;
+    debugPrint("getPosY() size $size");
+
     double range = (high - low) / size.height;
     return (high - markPrice) / range;
   }
