@@ -240,16 +240,12 @@ class _MobileChartState extends State<MobileChart> {
                                           child: RepaintBoundary(
                                             child: Stack(
                                               children: [
-                                                Container(
-                                                  key: _chartKey,
-                                                  child: MainWindowIndicatorWidget(
-                                                    indicatorDatas:
-                                                        widget.mainWindowDataContainer.indicatorComponentData,
-                                                    index: widget.index,
-                                                    candleWidth: widget.candleWidth,
-                                                    low: low,
-                                                    high: high,
-                                                  ),
+                                                MainWindowIndicatorWidget(
+                                                  indicatorDatas: widget.mainWindowDataContainer.indicatorComponentData,
+                                                  index: widget.index,
+                                                  candleWidth: widget.candleWidth,
+                                                  low: low,
+                                                  high: high,
                                                 ),
                                                 CandleStickWidget(
                                                   candles: widget.candles,
@@ -260,11 +256,16 @@ class _MobileChartState extends State<MobileChart> {
                                                   bearColor: widget.style.primaryBear,
                                                   bullColor: widget.style.primaryBull,
                                                 ),
+                                                Positioned.fill(
+                                                  child: Container(
+                                                    key: _chartKey,
+                                                  ),
+                                                ),
                                                 if (markIndex != -1 && getPosY(widget.markPrice ?? 0, high, low) != -1)
                                                   Positioned(
                                                     top: getPosY(widget.markPrice ?? 0, high, low),
                                                     right: (widget.candleWidth * (markIndex - widget.index + 1) +
-                                                        (widget.candleWidth / 4)),
+                                                        (widget.candleWidth / 6)),
                                                     child: Container(
                                                       width: 12,
                                                       height: 12,
