@@ -240,24 +240,25 @@ class _MobileChartState extends State<MobileChart> {
                                           child: RepaintBoundary(
                                             child: Stack(
                                               children: [
-                                                MainWindowIndicatorWidget(
-                                                  indicatorDatas: widget.mainWindowDataContainer.indicatorComponentData,
-                                                  index: widget.index,
-                                                  candleWidth: widget.candleWidth,
-                                                  low: low,
-                                                  high: high,
-                                                ),
                                                 Container(
                                                   key: _chartKey,
-                                                  child: CandleStickWidget(
-                                                    candles: widget.candles,
-                                                    candleWidth: widget.candleWidth,
+                                                  child: MainWindowIndicatorWidget(
+                                                    indicatorDatas:
+                                                        widget.mainWindowDataContainer.indicatorComponentData,
                                                     index: widget.index,
-                                                    high: high,
+                                                    candleWidth: widget.candleWidth,
                                                     low: low,
-                                                    bearColor: widget.style.primaryBear,
-                                                    bullColor: widget.style.primaryBull,
+                                                    high: high,
                                                   ),
+                                                ),
+                                                CandleStickWidget(
+                                                  candles: widget.candles,
+                                                  candleWidth: widget.candleWidth,
+                                                  index: widget.index,
+                                                  high: high,
+                                                  low: low,
+                                                  bearColor: widget.style.primaryBear,
+                                                  bullColor: widget.style.primaryBull,
                                                 ),
                                                 if (markIndex != -1 && getPosY(widget.markPrice ?? 0, high, low) != -1)
                                                   Positioned(
@@ -494,9 +495,6 @@ class _MobileChartState extends State<MobileChart> {
   double getPosY(double markPrice, double high, double low) {
     if (_chartKey.currentContext == null) {
       debugPrint("getPosY() _chartKey.currentContext is null");
-      if (mounted) {
-        setState(() {});
-      }
       return -1;
     }
 
