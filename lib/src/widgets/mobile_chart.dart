@@ -105,10 +105,9 @@ class _MobileChartState extends State<MobileChart> {
           debugPrint("MobileChart() markPrice ${widget.markPrice}");
 
           for (int i = candlesStartIndex; i < candlesEndIndex; i++) {
-            debugPrint(
-                "MobileChart() candles[i].date ${widget.candles[i].date}, candles[i + 1].date ${widget.candles[i + 1].date}");
-            if (widget.markDate!.isAfter(widget.candles[i].date) &&
-                widget.markDate!.isBefore(widget.candles[i + 1].date)) {
+            // debugPrint("MobileChart() candles[i].date ${widget.candles[i].date}, candles[i + 1].date ${widget.candles[i + 1].date}");
+            if (widget.markDate!.isBefore(widget.candles[i].date) &&
+                widget.markDate!.isAfter(widget.candles[i + 1].date)) {
               markIndex = i;
               break;
             }
