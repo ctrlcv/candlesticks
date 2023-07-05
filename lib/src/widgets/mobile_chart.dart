@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:candlesticks/candlesticks.dart';
@@ -89,6 +90,29 @@ class _MobileChartState extends State<MobileChart> {
   bool showIndicatorNames = false;
   double? manualScaleHigh;
   double? manualScaleLow;
+  Timer? _progressTimer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.markDate != null) {
+      _progressTimer = Timer.periodic(const Duration(milliseconds: 500), (_) {
+        if (mounted) {
+          setState(() {});
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    if (_progressTimer != null && _progressTimer!.isActive) {
+      _progressTimer!.cancel();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -262,18 +286,13 @@ class _MobileChartState extends State<MobileChart> {
                                                     top: getPosY(widget.markPrice ?? 0, high, low),
                                                     right: (widget.candleWidth * (markIndex - widget.index + 1)) +
                                                         (widget.candleWidth / 2) -
-                                                        6, //(widget.candleWidth * (markIndex - widget.index + 1) + 6),
+                                                        8,
                                                     child: Container(
-                                                      width: 12,
-                                                      height: 12,
+                                                      width: 16,
+                                                      height: 16,
                                                       alignment: Alignment.center,
                                                       child: widget.markImage,
                                                     ),
-                                                    // child: Container(
-                                                    //   width: widget.candleWidth,
-                                                    //   height: widget.candleWidth,
-                                                    //   color: Colors.yellowAccent,
-                                                    // ),
                                                   ),
                                               ],
                                             ),
