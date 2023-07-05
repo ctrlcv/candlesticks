@@ -105,7 +105,6 @@ class _MobileChartState extends State<MobileChart> {
           debugPrint("MobileChart() markPrice ${widget.markPrice}");
 
           for (int i = candlesStartIndex; i < candlesEndIndex; i++) {
-            // debugPrint("MobileChart() candles[i].date ${widget.candles[i].date}, candles[i + 1].date ${widget.candles[i + 1].date}");
             if (widget.markDate!.isBefore(widget.candles[i].date) &&
                 widget.markDate!.isAfter(widget.candles[i + 1].date)) {
               markIndex = i;
@@ -254,12 +253,15 @@ class _MobileChartState extends State<MobileChart> {
                                                 ),
                                                 if (markIndex != -1)
                                                   Positioned(
-                                                    // top: (high - low),
+                                                    top: (high - (widget.markPrice ?? 0)) / 300,
                                                     right: (widget.candleWidth * (markIndex - widget.index)),
                                                     child: Container(
-                                                      width: 14,
-                                                      height: 14,
-                                                      color: Colors.yellowAccent,
+                                                      width: 10,
+                                                      height: 10,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.yellowAccent,
+                                                        borderRadius: BorderRadius.circular(10),
+                                                      ),
                                                     ),
                                                   ),
                                               ],
