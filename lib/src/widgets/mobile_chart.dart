@@ -520,7 +520,7 @@ class _MobileChartState extends State<MobileChart> {
 
   double getPosY(double markPrice, double high, double low) {
     if (_chartKey.currentContext == null) {
-      // debugPrint("getPosY() _chartKey.currentContext is null");
+      debugPrint("getPosY() _chartKey.currentContext is null");
       return -1;
     }
 
