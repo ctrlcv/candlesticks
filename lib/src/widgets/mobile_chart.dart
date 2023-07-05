@@ -101,6 +101,10 @@ class _MobileChartState extends State<MobileChart> {
         if (mounted) {
           setState(() {});
         }
+
+        if (_progressTimer != null && _progressTimer!.isActive) {
+          _progressTimer!.cancel();
+        }
       });
     }
   }
@@ -126,12 +130,12 @@ class _MobileChartState extends State<MobileChart> {
         final int candlesStartIndex = max(widget.index, 0);
         final int candlesEndIndex = min(maxWidth ~/ widget.candleWidth + widget.index, widget.candles.length - 1);
 
-        debugPrint("MobileChart() candlesStartIndex $candlesStartIndex, candlesEndIndex $candlesEndIndex");
+        // debugPrint("MobileChart() candlesStartIndex $candlesStartIndex, candlesEndIndex $candlesEndIndex");
 
         int markIndex = -1;
         if (widget.markDate != null) {
-          debugPrint("MobileChart() markDate ${widget.markDate}");
-          debugPrint("MobileChart() markPrice ${widget.markPrice}");
+          // debugPrint("MobileChart() markDate ${widget.markDate}");
+          // debugPrint("MobileChart() markPrice ${widget.markPrice}");
 
           for (int i = candlesStartIndex; i < candlesEndIndex; i++) {
             if (widget.markDate!.isBefore(widget.candles[i].date) &&
@@ -142,7 +146,7 @@ class _MobileChartState extends State<MobileChart> {
           }
         }
 
-        debugPrint("MobileChart() markIndex $markIndex");
+        // debugPrint("MobileChart() markIndex $markIndex");
 
         if (candlesEndIndex == widget.candles.length - 1) {
           Future(() {
@@ -516,13 +520,13 @@ class _MobileChartState extends State<MobileChart> {
 
   double getPosY(double markPrice, double high, double low) {
     if (_chartKey.currentContext == null) {
-      debugPrint("getPosY() _chartKey.currentContext is null");
+      // debugPrint("getPosY() _chartKey.currentContext is null");
       return -1;
     }
 
     final RenderBox renderBox = _chartKey.currentContext!.findRenderObject() as RenderBox;
     Size size = renderBox.size;
-    debugPrint("getPosY() size $size");
+    // debugPrint("getPosY() size $size");
 
     double range = (high - low) / size.height;
     return (high - markPrice) / range;
