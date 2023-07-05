@@ -262,7 +262,8 @@ class _MobileChartState extends State<MobileChart> {
                                                 if (markIndex != -1 && getPosY(widget.markPrice ?? 0, high, low) != -1)
                                                   Positioned(
                                                     top: getPosY(widget.markPrice ?? 0, high, low),
-                                                    right: (widget.candleWidth * (markIndex - widget.index + 1)),
+                                                    right: (widget.candleWidth * (markIndex - widget.index + 1) +
+                                                        (widget.candleWidth / 4)),
                                                     child: Container(
                                                       width: 12,
                                                       height: 12,
@@ -493,6 +494,9 @@ class _MobileChartState extends State<MobileChart> {
   double getPosY(double markPrice, double high, double low) {
     if (_chartKey.currentContext == null) {
       debugPrint("getPosY() _chartKey.currentContext is null");
+      if (mounted) {
+        setState(() {});
+      }
       return -1;
     }
 
