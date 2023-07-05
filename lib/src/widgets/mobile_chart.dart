@@ -238,6 +238,7 @@ class _MobileChartState extends State<MobileChart> {
                                           duration: Duration(milliseconds: 300),
                                           padding: EdgeInsets.symmetric(vertical: MAIN_CHART_VERTICAL_PADDING),
                                           child: RepaintBoundary(
+                                            key: _chartKey,
                                             child: Stack(
                                               children: [
                                                 MainWindowIndicatorWidget(
@@ -247,6 +248,9 @@ class _MobileChartState extends State<MobileChart> {
                                                   low: low,
                                                   high: high,
                                                 ),
+                                                // Positioned.fill(
+                                                //   child: Container(),
+                                                // ),
                                                 CandleStickWidget(
                                                   candles: widget.candles,
                                                   candleWidth: widget.candleWidth,
@@ -256,16 +260,12 @@ class _MobileChartState extends State<MobileChart> {
                                                   bearColor: widget.style.primaryBear,
                                                   bullColor: widget.style.primaryBull,
                                                 ),
-                                                Positioned.fill(
-                                                  child: Container(
-                                                    key: _chartKey,
-                                                  ),
-                                                ),
                                                 if (markIndex != -1 && getPosY(widget.markPrice ?? 0, high, low) != -1)
                                                   Positioned(
                                                     top: getPosY(widget.markPrice ?? 0, high, low),
                                                     right: (widget.candleWidth * (markIndex - widget.index + 1) +
-                                                        (widget.candleWidth / 6)),
+                                                        6 -
+                                                        (widget.candleWidth / 2)),
                                                     child: Container(
                                                       width: 12,
                                                       height: 12,
