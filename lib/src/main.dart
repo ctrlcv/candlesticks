@@ -140,6 +140,9 @@ class _CandlesticksState extends State<Candlesticks> {
   Widget build(BuildContext context) {
     final style = widget.style ??
         (Theme.of(context).brightness == Brightness.dark ? CandleSticksStyle.dark() : CandleSticksStyle.light());
+
+    debugPrint("index $index");
+
     return Stack(
       children: [
         Column(

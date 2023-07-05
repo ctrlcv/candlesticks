@@ -53,6 +53,10 @@ class MobileChart extends StatefulWidget {
 
   final Function() onReachEnd;
 
+  final DateTime? markDate;
+
+  final double? markPrice;
+
   MobileChart({
     required this.style,
     required this.onScaleUpdate,
@@ -66,6 +70,8 @@ class MobileChart extends StatefulWidget {
     required this.onReachEnd,
     required this.mainWindowDataContainer,
     required this.onRemoveIndicator,
+    this.markDate,
+    this.markPrice,
   });
 
   @override
@@ -93,6 +99,19 @@ class _MobileChartState extends State<MobileChart> {
 
         debugPrint("MobileChart() candlesStartIndex $candlesStartIndex, candlesEndIndex $candlesEndIndex");
 
+        int markIndex = -1;
+        if (widget.markDate != null) {
+          for (int i = candlesStartIndex; i < candlesEndIndex; i++) {
+            if (widget.markDate!.isAfter(widget.candles[i].date) &&
+                widget.markDate!.isBefore(widget.candles[i + 1].date)) {
+              markIndex = i;
+              break;
+            }
+          }
+        }
+
+        debugPrint("MobileChart() markIndex $markIndex");
+
         if (candlesEndIndex == widget.candles.length - 1) {
           Future(() {
             widget.onReachEnd();
@@ -119,6 +138,14 @@ class _MobileChartState extends State<MobileChart> {
         if (candlesHighPrice == candlesLowPrice) {
           candlesHighPrice += 10;
           candlesLowPrice -= 10;
+        }
+
+        double markPosX = -1;
+        double markPosY = -1;
+
+        if (markIndex != -1) {
+          double tmpCandleHighPrice = candlesHighPrice - 10;
+          double tmpCandleLowPrice = candlesHighPrice + 10;
         }
 
         // calculate priceScale
@@ -221,6 +248,16 @@ class _MobileChartState extends State<MobileChart> {
                                                   bearColor: widget.style.primaryBear,
                                                   bullColor: widget.style.primaryBull,
                                                 ),
+                                                if (markIndex != -1)
+                                                  Positioned(
+                                                    // top: (high - low),
+                                                    right: (widget.candleWidth * (markIndex - widget.index)),
+                                                    child: Container(
+                                                      width: 14,
+                                                      height: 14,
+                                                      color: Colors.yellowAccent,
+                                                    ),
+                                                  ),
                                               ],
                                             ),
                                           ),
