@@ -79,6 +79,8 @@ class MobileChart extends StatefulWidget {
 }
 
 class _MobileChartState extends State<MobileChart> {
+  GlobalKey _chartKey = GlobalKey();
+
   double? longPressX;
   double? longPressY;
   bool showIndicatorNames = false;
@@ -242,18 +244,21 @@ class _MobileChartState extends State<MobileChart> {
                                                   low: low,
                                                   high: high,
                                                 ),
-                                                CandleStickWidget(
-                                                  candles: widget.candles,
-                                                  candleWidth: widget.candleWidth,
-                                                  index: widget.index,
-                                                  high: high,
-                                                  low: low,
-                                                  bearColor: widget.style.primaryBear,
-                                                  bullColor: widget.style.primaryBull,
+                                                Container(
+                                                  key: _chartKey,
+                                                  child: CandleStickWidget(
+                                                    candles: widget.candles,
+                                                    candleWidth: widget.candleWidth,
+                                                    index: widget.index,
+                                                    high: high,
+                                                    low: low,
+                                                    bearColor: widget.style.primaryBear,
+                                                    bullColor: widget.style.primaryBull,
+                                                  ),
                                                 ),
                                                 if (markIndex != -1)
                                                   Positioned(
-                                                    top: (high - (widget.markPrice ?? 0)) / 300,
+                                                    top: getPosY(widget.markPrice ?? 0, high, low),
                                                     right: (widget.candleWidth * (markIndex - widget.index)),
                                                     child: Container(
                                                       width: 10,
@@ -482,5 +487,12 @@ class _MobileChartState extends State<MobileChart> {
         );
       },
     );
+  }
+
+  double getPosY(double markPrice, double high, double low) {
+    final RenderBox renderBox = _chartKey.currentContext!.findRenderObject() as RenderBox;
+    Size size = renderBox.size;
+    double range = (high - low) / size.height;
+    return (high - markPrice) / range;
   }
 }
