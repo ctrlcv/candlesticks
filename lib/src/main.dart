@@ -242,6 +242,8 @@ class _CandlesticksState extends State<Candlesticks> {
                         candleWidth: width,
                         candles: widget.candles,
                         index: index,
+                        markDate: widget.markDate,
+                        markPrice: widget.markPrice,
                       );
                     }
                   },
