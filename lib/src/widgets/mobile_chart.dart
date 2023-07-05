@@ -260,23 +260,20 @@ class _MobileChartState extends State<MobileChart> {
                                                 if (markIndex != -1 && getPosY(widget.markPrice ?? 0, high, low) != -1)
                                                   Positioned(
                                                     top: getPosY(widget.markPrice ?? 0, high, low),
-                                                    right: (widget.candleWidth *
-                                                        (markIndex -
-                                                            widget.index +
-                                                            1)), //(widget.candleWidth * (markIndex - widget.index + 1) + 6),
-                                                    // child: Container(
-                                                    //   width: 12,
-                                                    //   height: 12,
-                                                    //   alignment: Alignment.center,
-                                                    //   child: widget.markImage,
-                                                    // ),
+                                                    right: (widget.candleWidth * (markIndex - widget.index + 1)) +
+                                                        (widget.candleWidth / 2) -
+                                                        6, //(widget.candleWidth * (markIndex - widget.index + 1) + 6),
                                                     child: Container(
-                                                      width: widget.candleWidth,
-                                                      height: widget.candleWidth,
-                                                      color: Colors.yellowAccent,
-                                                      // alignment: Alignment.center,
-                                                      // child: widget.markImage,
+                                                      width: 12,
+                                                      height: 12,
+                                                      alignment: Alignment.center,
+                                                      child: widget.markImage,
                                                     ),
+                                                    // child: Container(
+                                                    //   width: widget.candleWidth,
+                                                    //   height: widget.candleWidth,
+                                                    //   color: Colors.yellowAccent,
+                                                    // ),
                                                   ),
                                               ],
                                             ),
