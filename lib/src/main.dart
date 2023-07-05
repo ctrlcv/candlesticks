@@ -55,6 +55,8 @@ class Candlesticks extends StatefulWidget {
 
   final double? markPrice;
 
+  final Widget? markImage;
+
   const Candlesticks({
     Key? key,
     required this.candles,
@@ -70,6 +72,7 @@ class Candlesticks extends StatefulWidget {
     this.showZoomButtons = true,
     this.markDate,
     this.markPrice,
+    this.markImage,
   })  : assert(candles.length == 0 || candles.length > 1, "Please provide at least 2 candles"),
         super(key: key);
 
@@ -203,48 +206,48 @@ class _CandlesticksState extends State<Candlesticks> {
                       );
                     } else {
                       return MobileChart(
-                        style: style,
-                        onRemoveIndicator: widget.onRemoveIndicator,
-                        mainWindowDataContainer: mainWindowDataContainer!,
-                        chartAdjust: widget.chartAdjust,
-                        onScaleUpdate: (double scale) {
-                          scale = max(0.90, scale);
-                          scale = min(1.1, scale);
-                          setState(() {
-                            candleWidth *= scale;
-                            candleWidth = min(candleWidth, 20);
-                            candleWidth = max(candleWidth, 2);
-                          });
-                        },
-                        onPanEnd: () {
-                          lastIndex = index;
-                        },
-                        onHorizontalDragUpdate: (double x) {
-                          setState(() {
-                            x = x - lastX;
-                            index = lastIndex + x ~/ candleWidth;
-                            index = max(index, -10);
-                            index = min(index, widget.candles.length - 1);
-                          });
-                        },
-                        onPanDown: (double value) {
-                          lastX = value;
-                          lastIndex = index;
-                        },
-                        onReachEnd: () {
-                          if (isCallingLoadMore == false && widget.onLoadMoreCandles != null) {
-                            isCallingLoadMore = true;
-                            widget.onLoadMoreCandles!().then((_) {
-                              isCallingLoadMore = false;
+                          style: style,
+                          onRemoveIndicator: widget.onRemoveIndicator,
+                          mainWindowDataContainer: mainWindowDataContainer!,
+                          chartAdjust: widget.chartAdjust,
+                          onScaleUpdate: (double scale) {
+                            scale = max(0.90, scale);
+                            scale = min(1.1, scale);
+                            setState(() {
+                              candleWidth *= scale;
+                              candleWidth = min(candleWidth, 20);
+                              candleWidth = max(candleWidth, 2);
                             });
-                          }
-                        },
-                        candleWidth: width,
-                        candles: widget.candles,
-                        index: index,
-                        markDate: widget.markDate,
-                        markPrice: widget.markPrice,
-                      );
+                          },
+                          onPanEnd: () {
+                            lastIndex = index;
+                          },
+                          onHorizontalDragUpdate: (double x) {
+                            setState(() {
+                              x = x - lastX;
+                              index = lastIndex + x ~/ candleWidth;
+                              index = max(index, -10);
+                              index = min(index, widget.candles.length - 1);
+                            });
+                          },
+                          onPanDown: (double value) {
+                            lastX = value;
+                            lastIndex = index;
+                          },
+                          onReachEnd: () {
+                            if (isCallingLoadMore == false && widget.onLoadMoreCandles != null) {
+                              isCallingLoadMore = true;
+                              widget.onLoadMoreCandles!().then((_) {
+                                isCallingLoadMore = false;
+                              });
+                            }
+                          },
+                          candleWidth: width,
+                          candles: widget.candles,
+                          index: index,
+                          markDate: widget.markDate,
+                          markPrice: widget.markPrice,
+                          markImage: widget.markImage);
                     }
                   },
                 ),

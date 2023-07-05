@@ -57,6 +57,8 @@ class MobileChart extends StatefulWidget {
 
   final double? markPrice;
 
+  final Widget? markImage;
+
   MobileChart({
     required this.style,
     required this.onScaleUpdate,
@@ -72,6 +74,7 @@ class MobileChart extends StatefulWidget {
     required this.onRemoveIndicator,
     this.markDate,
     this.markPrice,
+    this.markImage,
   });
 
   @override
@@ -259,14 +262,13 @@ class _MobileChartState extends State<MobileChart> {
                                                 if (markIndex != -1 && getPosY(widget.markPrice ?? 0, high, low) != -1)
                                                   Positioned(
                                                     top: getPosY(widget.markPrice ?? 0, high, low),
-                                                    right: (widget.candleWidth * (markIndex - widget.index)),
+                                                    right: (widget.candleWidth * (markIndex - widget.index) -
+                                                        (widget.candleWidth / 2)),
                                                     child: Container(
-                                                      width: 10,
-                                                      height: 10,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.yellowAccent,
-                                                        borderRadius: BorderRadius.circular(10),
-                                                      ),
+                                                      width: 12,
+                                                      height: 12,
+                                                      alignment: Alignment.center,
+                                                      child: widget.markImage,
                                                     ),
                                                   ),
                                               ],
